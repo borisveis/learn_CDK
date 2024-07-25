@@ -13,8 +13,13 @@ class HelloCdkStack(Stack):
                       max_azs=3  # Default is all AZs in the region
                       )
         # Define an EC2 instance
-        instance = ec2.Instance(self, "MyInstance",
+        instance1 = ec2.Instance(self, "MyInstance1",
                                 instance_type=ec2.InstanceType("t2.micro"),
                                 machine_image=ec2.MachineImage.latest_amazon_linux2(),
                                 vpc=vpc
                                 )
+        instance2 = ec2.Instance(self, "MyInstance2",
+                                 instance_type=ec2.InstanceType("t2.micro"),
+                                 machine_image=ec2.MachineImage.latest_amazon_linux2(),
+                                 vpc=vpc
+                                 )
