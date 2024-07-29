@@ -40,7 +40,5 @@ class HelloCdkStack(Stack):
                                  machine_image=ec2.MachineImage.latest_amazon_linux2(),
                                  vpc=vpc
                                  )
-        instance3 =  MyEc2Instance(self, "MyInstance",
-                                                vpc=vpc,
-                                                key_name="my-key-pair",
-                                                instance_name="MyCustomInstance")
+        instance3 =  MyEc2Instance(self, "MyInstance3_useconstruct",
+                                                vpc=vpc)

@@ -6,6 +6,8 @@ from constructs import Construct
 
 class MyEc2Instance(ec2.Instance):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
+        self.instance_type=ec2.InstanceType("t2.micro")
+        machine_image=ec2.MachineImage.latest_amazon_linux2()
         # Define any custom parameters you want to add
         custom_instance_type = kwargs.get("t2.micro", ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MICRO))
         custom_machine_image = kwargs.get('machine_image', ec2.MachineImage.latest_amazon_linux())
