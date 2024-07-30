@@ -27,8 +27,24 @@ class HelloCdkStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         vpc = ec2.Vpc(self, "MyVpc",
-                      max_azs=3  # Default is all AZs in the region
-                      )
+                      max_azs=3,  # Default is all AZs in the region
+        subnet_configuration=[
+            ec2.SubnetConfiguration(
+                cidr_mask=24,
+                name="subnet_PUBLIC",
+                subnet_type=ec2.SubnetType.PUBLIC
+            ),
+            ec2.SubnetConfiguration(
+                cidr_mask=24,
+                name="subnet_PRIVATE_WITH_EGRESS",
+                subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS
+            ),
+            ec2.SubnetConfiguration(
+                cidr_mask=24,
+                name="subnet_PRIVATE_ISOLATED",
+                subnet_type=ec2.SubnetType.PRIVATE_ISOLATED
+            )
+        ])
         # Define an EC2 instance
         instance1 = ec2.Instance(self, "MyInstance1",
                                  instance_type=ec2.InstanceType("t2.micro"),
